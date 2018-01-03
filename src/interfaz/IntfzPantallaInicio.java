@@ -40,7 +40,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
 
 public class IntfzPantallaInicio extends JFrame {
-
+	//esto es Miguel haciendo una prueba de git, please ignore
 	private JLayeredPane contentPane;
 	private JLabel lblLogoPyromik;
 	private JLabel lblPvtranslator;
