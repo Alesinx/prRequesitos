@@ -1,6 +1,5 @@
 package principal;
 
-//prueba de git
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,6 +10,8 @@ import interfaz.BDConnection;
 public class Modulo {
 
 	private String nombre;
+	private String tecnologia;
+
 	private ArrayList<CurvaOriginal> curvas;
 
 	private double alfa;
@@ -18,13 +19,31 @@ public class Modulo {
 	private double gamma;
 	private double kappa;
 
+	private double temperaturaNOCT;
+	private double iscNOCT;
+	private double vocNOCT;
+	private double pmaxNOCT;
+	private double ipmaxNOCT;
+	private double vpmaxNOCT;
+
+	private double rendimiento;
+	private double idealidad;
+	private double resistencia;
+
+	private double minISC;
+	private double minVOC;
+	private double minPMAX;
+	private double minFF;
+
+	private int celSerie;
+	private int celParalelo;
 
 	public Modulo(){
 		nombre = "";
-		curvas=null;
+		curvas = null;
 	}
 
-	public Modulo(String name) throws ClassNotFoundException {
+	public Modulo(String name) throws ClassNotFoundException { // FALTA CARGAR LOS NUEVOS ATRIBUTOS
 		BDConnection baseDatos = new BDConnection();
 		nombre=name;
 		for(Object[] elemento : baseDatos.Select("SELECT * FROM MODULO WHERE nombreModulo LIKE '"+name+"';")){
@@ -38,25 +57,104 @@ public class Modulo {
 
 	}
 
-	public Modulo(String n, double a, double b, double g, double k) throws ClassNotFoundException{
+	public Modulo(String name,double a,double b,double g,double k){
+		this.nombre = name;
+		this.tecnologia = "";
 
-		nombre = n;
-		alfa = a;
-		beta = b;
-		gamma = g;
-		kappa = k;
+		this.alfa = a;
+		this.beta = b;
+		this.gamma = g;
+		this.kappa = k;
+
+		curvas = new ArrayList<>();
+
+		this.temperaturaNOCT = 0;
+		this.iscNOCT = 0;
+		this.vocNOCT = 0;
+		this.pmaxNOCT = 0;
+		this.ipmaxNOCT = 0;
+		this.vpmaxNOCT = 0;
+
+		this.rendimiento = 0;
+		this.idealidad = 0;
+		this.resistencia = 0;
+
+		this.minISC = 0;
+		this.minVOC= 0;
+		this.minPMAX = 0;
+		this.minFF = 0;
+
+		this.celSerie=0;
+		this.celParalelo=0;
+	}
+
+	public Modulo(String n, String tec, double a, double b, double g, double k, double tempN,double iscN,double vocN,double pmaxN,double ipmaxN
+			, double vpmaxN,double rend,double ide,double res,double iscM,double vocM,double pmaxM,double ffM,int celS,int celP) throws ClassNotFoundException{
+
+		this.nombre = n;
+		this.tecnologia = tec;
+
+		this.alfa = a;
+		this.beta = b;
+		this.gamma = g;
+		this.kappa = k;
+
+		curvas = new ArrayList<>();
+
+		this.temperaturaNOCT = tempN;
+		this.iscNOCT = iscN;
+		this.vocNOCT = vocN;
+		this.pmaxNOCT = pmaxN;
+		this.ipmaxNOCT = ipmaxN;
+		this.vpmaxNOCT = vpmaxN;
+
+		this.rendimiento = rend;
+		this.idealidad = ide;
+		this.resistencia = res;
+
+		this.minISC = iscM;
+		this.minVOC= vocM;
+		this.minPMAX = pmaxM;
+		this.minFF = ffM;
+
+		this.celSerie=celS;
+		this.celParalelo=celP;
+
 		BDConnection baseDatos = new BDConnection();
-		baseDatos.Insert("INSERT INTO Modulo values ('"+n+"', '"+a+"', '"+b+"', '"+g+"', '"+k+"');");
+		baseDatos.Insert("INSERT INTO Modulo values ('"+n+"', '"+a+"', '"+b+"', '"+g+"', '"+k+"');"); // MODIFICAR LA QUERY CON LOS NUEVOS ATRIBS
 
 	}
-	public Modulo(String n, double a, double b, double g, double k,ArrayList<CurvaOriginal> list){
+	public Modulo(String n, String tec, double a, double b, double g, double k,ArrayList<CurvaOriginal> list, double tempN,double iscN,double vocN,double pmaxN,double ipmaxN
+			, double vpmaxN,double rend,double ide,double res,double iscM,double vocM,double pmaxM,double ffM,int celS,int celP){
 
-		nombre = n;
-		alfa = a;
-		beta = b;
-		gamma = g;
-		kappa = k;
-		curvas = list;
+		this.nombre = n;
+		this.tecnologia = tec;
+
+		this.alfa = a;
+		this.beta = b;
+		this.gamma = g;
+		this.kappa = k;
+
+		this.curvas = list;
+
+		this.temperaturaNOCT = tempN;
+		this.iscNOCT = iscN;
+		this.vocNOCT = vocN;
+		this.pmaxNOCT = pmaxN;
+		this.ipmaxNOCT = ipmaxN;
+		this.vpmaxNOCT = vpmaxN;
+
+		this.rendimiento = rend;
+		this.idealidad = ide;
+		this.resistencia = res;
+
+		this.minISC = iscM;
+		this.minVOC= vocM;
+		this.minPMAX = pmaxM;
+		this.minFF = ffM;
+
+		this.celSerie=celS;
+		this.celParalelo=celP;
 
 
 	}
@@ -84,7 +182,7 @@ public class Modulo {
 
 	// ---- Metodo para listar los modulos de la BD
 
-	public static List<Modulo> ListaModulo() throws ClassNotFoundException {
+	public static List<Modulo> ListaModulo() throws ClassNotFoundException { // EXTENDER METODO CON LOS NUEVOS ATRIBUTOS
 		ArrayList<Modulo> lista = new ArrayList<Modulo>();
 		BDConnection baseDatos = new BDConnection();
 		for(Object[] elemento : baseDatos.Select("SELECT * FROM MODULO;")){
@@ -103,12 +201,12 @@ public class Modulo {
 	public  List<String> ListaCampanyas() throws ClassNotFoundException{
 		BDConnection miBD = new BDConnection();
 		ArrayList<String> lista = new ArrayList<String>();
-		
+
 		for(Object[] elemento : miBD.Select("SELECT nombreCampanya FROM campanya where Modulo_nombreModulo = '" + nombre + "';")){
-			
+
 			lista.add(elemento[0].toString());
-			
-			
+
+
 		}
 		return lista;
 	}
@@ -117,6 +215,70 @@ public class Modulo {
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public String getTecnologia() {
+		return tecnologia;
+	}
+
+	public double getTemperaturaNOCT() {
+		return temperaturaNOCT;
+	}
+
+	public double getIscNOCT() {
+		return iscNOCT;
+	}
+
+	public double getVocNOCT() {
+		return vocNOCT;
+	}
+
+	public double getPmaxNOCT() {
+		return pmaxNOCT;
+	}
+
+	public double getIpmaxNOCT() {
+		return ipmaxNOCT;
+	}
+
+	public double getVpmaxNOCT() {
+		return vpmaxNOCT;
+	}
+
+	public double getRendimiento() {
+		return rendimiento;
+	}
+
+	public double getIdealidad() {
+		return idealidad;
+	}
+
+	public double getResistencia() {
+		return resistencia;
+	}
+
+	public double getMinISC() {
+		return minISC;
+	}
+
+	public double getMinVOC() {
+		return minVOC;
+	}
+
+	public double getMinPMAX() {
+		return minPMAX;
+	}
+
+	public double getMinFF() {
+		return minFF;
+	}
+
+	public int getCelSerie() {
+		return celSerie;
+	}
+
+	public int getCelParalelo() {
+		return celParalelo;
 	}
 
 	public double getAlfa() {
@@ -135,7 +297,7 @@ public class Modulo {
 		return kappa;
 	}
 
-	// ----- Setters
+	// ----- Setters (FALTAN LOS UPDATES DE LOS NUEVOS ATRIBUTOS)
 
 	public void setNombre(String nombre) throws ClassNotFoundException {
 		BDConnection miBD = new BDConnection();
@@ -167,6 +329,106 @@ public class Modulo {
 		miBD.Update("UPDATE MODULO SET valorKappa='"+kappa+"' WHERE NombreModulo LIKE'"+nombre+"';");
 	}
 
+	public void setTecnologia(String tecnologia) throws ClassNotFoundException {
+		this.tecnologia = tecnologia;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET tecnologia='"+tecnologia+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setTemperaturaNOCT(double temperaturaNOCT) throws ClassNotFoundException {
+		this.temperaturaNOCT = temperaturaNOCT;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET temperaturaNOCT='"+temperaturaNOCT+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setIscNOCT(double iscNOCT) throws ClassNotFoundException {
+		this.iscNOCT = iscNOCT;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET iscNOCT='"+iscNOCT+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setVocNOCT(double vocNOCT) throws ClassNotFoundException {
+		this.vocNOCT = vocNOCT;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET vocNOCT='"+vocNOCT+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setPmaxNOCT(double pmaxNOCT) throws ClassNotFoundException {
+		this.pmaxNOCT = pmaxNOCT;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET pmaxNOCT='"+pmaxNOCT+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setIpmaxNOCT(double ipmaxNOCT) throws ClassNotFoundException {
+		this.ipmaxNOCT = ipmaxNOCT;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET ipmaxNOCT='"+ipmaxNOCT+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setVpmaxNOCT(double vpmaxNOCT) throws ClassNotFoundException {
+		this.vpmaxNOCT = vpmaxNOCT;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET vpmaxNOCT='"+vpmaxNOCT+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setRendimiento(double rendimiento) throws ClassNotFoundException {
+		this.rendimiento = rendimiento;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET rendimiento='"+rendimiento+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setIdealidad(double idealidad) throws ClassNotFoundException {
+		this.idealidad = idealidad;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET idealidad='"+idealidad+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setResistencia(double resistencia) throws ClassNotFoundException {
+		this.resistencia = resistencia;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET resistencia='"+resistencia+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setMinISC(double minISC) throws ClassNotFoundException {
+		this.minISC = minISC;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET minISC='"+minISC+"' WHERE NombreModulo LIKE'"+nombre+"';");
+	}
+
+	public void setMinVOC(double minVOC) throws ClassNotFoundException {
+		this.minVOC = minVOC;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET minVOC='"+minVOC+"' WHERE NombreModulo LIKE'"+nombre+"';");
+
+	}
+
+	public void setMinPMAX(double minPMAX) throws ClassNotFoundException {
+		this.minPMAX = minPMAX;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET minPMAX='"+minPMAX+"' WHERE NombreModulo LIKE'"+nombre+"';");
+
+	}
+
+	public void setMinFF(double minFF) throws ClassNotFoundException {
+		this.minFF = minFF;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET minFF='"+minFF+"' WHERE NombreModulo LIKE'"+nombre+"';");
+
+	}
+
+	public void setCelSerie(int celSerie) throws ClassNotFoundException {
+		this.celSerie = celSerie;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET celulasEnSerie='"+celSerie+"' WHERE NombreModulo LIKE'"+nombre+"';");
+
+	}
+
+	public void setCelParalelo(int celParalelo) throws ClassNotFoundException {
+		this.celParalelo = celParalelo;
+		BDConnection miBD = new BDConnection();
+		miBD.Update("UPDATE MODULO SET celulasEnParalelo='"+celParalelo+"' WHERE NombreModulo LIKE'"+nombre+"';");
+
+	}
 
 	// -----
 
