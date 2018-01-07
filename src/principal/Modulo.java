@@ -52,6 +52,27 @@ public class Modulo {
 			beta = (Double.parseDouble(elemento[2].toString()));
 			gamma = (Double.parseDouble(elemento[3].toString()));
 			kappa = (Double.parseDouble(elemento[4].toString()));
+			tecnologia = elemento[5].toString();
+			temperaturaNOCT = Double.parseDouble(elemento[6].toString());
+			
+			iscNOCT= Double.parseDouble(elemento[7].toString());
+			vocNOCT=Double.parseDouble(elemento[8].toString());
+			pmaxNOCT = Double.parseDouble(elemento[9].toString());
+			ipmaxNOCT=Double.parseDouble(elemento[10].toString());
+			vpmaxNOCT=Double.parseDouble(elemento[11].toString());
+			
+			rendimiento=Double.parseDouble(elemento[12].toString());
+			resistencia=Double.parseDouble(elemento[14].toString());
+			idealidad=Double.parseDouble(elemento[13].toString());
+			
+			minISC=Double.parseDouble(elemento[15].toString());
+			minVOC=Double.parseDouble(elemento[16].toString());
+			minFF=Double.parseDouble(elemento[18].toString());
+			minPMAX=Double.parseDouble(elemento[17].toString());
+			
+			celSerie = Integer.parseInt(elemento[19].toString());
+			celSerie =Integer.parseInt(elemento[20].toString());
+			
 		}
 	}
 
@@ -119,7 +140,7 @@ public class Modulo {
 		this.celParalelo=celP;
 
 		BDConnection baseDatos = new BDConnection();
-		baseDatos.Insert("INSERT INTO Modulo values ('"+n+"', '"+a+"', '"+b+"', '"+g+"', '"+k+"');"); // MODIFICAR LA QUERY CON LOS NUEVOS ATRIBS
+		baseDatos.Insert("INSERT INTO Modulo values ('"+n+"', '"+a+"', '"+b+"', '"+g+"', '"+k+"' ,'"+tecnologia+"' ,'"+temperaturaNOCT+"' ,'"+iscNOCT+"','"+vocNOCT+"','"+pmaxNOCT+"','"+ipmaxNOCT+"','"+vpmaxNOCT+"','"+rendimiento+"','"+idealidad+"','"+resistencia+"','"+minISC+"','"+minVOC+"','"+minPMAX+"','"+minFF+"','"+celSerie+"','"+celParalelo+"');"); // MODIFICAR LA QUERY CON LOS NUEVOS ATRIBS
 
 	}
 	public Modulo(String n, String tec, double a, double b, double g, double k,ArrayList<CurvaOriginal> list, double tempN,double iscN,double vocN,double pmaxN,double ipmaxN
@@ -191,7 +212,27 @@ public class Modulo {
 			mod.setBeta(Double.parseDouble(elemento[2].toString()));
 			mod.setGamma(Double.parseDouble(elemento[3].toString()));
 			mod.setKappa(Double.parseDouble(elemento[4].toString()));
-
+			
+			mod.setTecnologia(elemento[5].toString());
+			mod.setTemperaturaNOCT(Double.parseDouble(elemento[6].toString()));
+			mod.setIscNOCT(Double.parseDouble(elemento[7].toString()));
+			mod.setVocNOCT(Double.parseDouble(elemento[8].toString()));
+			mod.setPmaxNOCT(Double.parseDouble(elemento[9].toString()));
+			mod.setIpmaxNOCT(Double.parseDouble(elemento[10].toString()));
+			mod.setVpmaxNOCT(Double.parseDouble(elemento[11].toString()));
+			
+			mod.setRendimiento(Double.parseDouble(elemento[12].toString()));
+			mod.setIdealidad(Double.parseDouble(elemento[13].toString()));
+			mod.setResistencia(Double.parseDouble(elemento[14].toString()));
+			
+			mod.setMinISC(Double.parseDouble(elemento[15].toString()));
+			mod.setMinVOC(Double.parseDouble(elemento[16].toString()));
+			mod.setMinPMAX(Double.parseDouble(elemento[17].toString()));
+			mod.setMinFF(Double.parseDouble(elemento[18].toString()));
+			
+			mod.setCelSerie(Integer.parseInt(elemento[19].toString()));
+			mod.setCelSerie(Integer.parseInt(elemento[20].toString()));
+			
 			lista.add(mod);
 		}
 		return lista;
