@@ -475,6 +475,18 @@ public class IntfzPantallaInicio extends JFrame {
 												list.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 												list.setBounds(20, 46, 475, 180);
 												list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);    //solo se puede seleccionar uno
+												
+												//creamos el modelo
+										        DefaultListModel<String> modeloCamp = new DefaultListModel<String>();
+										        try {
+													for(Modulo mod : Modulo.ListaModulo()) {
+														modeloCamp.addElement(mod.getNombre());
+													}
+												} catch (ClassNotFoundException e1) {
+													// TODO Auto-generated catch block
+													e1.printStackTrace();
+												}
+												
 												list.setModel(modeloCamp);
 												panelModulo.add(list);
 												
@@ -525,16 +537,7 @@ public class IntfzPantallaInicio extends JFrame {
 												
 												
 		panelModulo.setVisible(false);
-				//creamos el modelo
-		        DefaultListModel<String> modeloCamp = new DefaultListModel<String>();
-		        try {
-					for(Modulo mod : Modulo.ListaModulo()) {
-						modeloCamp.addElement(mod.getNombre());
-					}
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
 
 
 	}
