@@ -343,7 +343,8 @@ public class ImportarCurva {
 		Canal cCelula = new Canal(0, cel, celInic, celFin, "Celula isofoton seguidor", "A");
 
 		if(auxM.isEmpty()) { // Si el modulo al que pertenece la curva no esta en la BD
-			Modulo auxModule = new Modulo(moduleName,0,0,0,0); // Creamos el modulo con solo el nombre
+			Modulo auxModule = new Modulo(moduleName, "", 0, 0, 0, 0, 0,0,0,0,0
+					, 0,0,0,0,0,0,0,0,0,0); // Creamos el modulo con solo el nombre
 		}
 
 		System.out.println(vol.toString());

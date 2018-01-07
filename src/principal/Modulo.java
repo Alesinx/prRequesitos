@@ -142,7 +142,7 @@ public class Modulo {
 		this.celParalelo=celP;
 
 		BDConnection baseDatos = new BDConnection();
-		baseDatos.Insert("INSERT INTO Modulo values ('"+n+"', '"+a+"', '"+b+"', '"+g+"', '"+k+"' ,'"+tecnologia+"' ,'"+temperaturaNOCT+"' ,'"+iscNOCT+"','"+vocNOCT+"','"+pmaxNOCT+"','"+ipmaxNOCT+"','"+vpmaxNOCT+"','"+rendimiento+"','"+idealidad+"','"+resistencia+"','"+minISC+"','"+minVOC+"','"+minPMAX+"','"+minFF+"','"+celSerie+"','"+celParalelo+"');"); // MODIFICAR LA QUERY CON LOS NUEVOS ATRIBS
+		baseDatos.Insert("INSERT INTO Modulo values ('"+n+"', '"+a+"', '"+b+"', '"+g+"', '"+k+"' ,'"+tecnologia+"' ,'"+temperaturaNOCT+"' ,'"+iscNOCT+"','"+vocNOCT+"','"+pmaxNOCT+"','"+ipmaxNOCT+"','"+vpmaxNOCT+"','"+rendimiento+"','"+idealidad+"','"+resistencia+"','"+minISC+"','"+minVOC+"','"+minPMAX+"','"+minFF+"','"+celSerie+"','"+celParalelo+"');");
 
 	}
 	public Modulo(String n, String tec, double a, double b, double g, double k,ArrayList<CurvaOriginal> list, double tempN,double iscN,double vocN,double pmaxN,double ipmaxN
