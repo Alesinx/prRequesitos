@@ -111,7 +111,7 @@ public class IntfzModuloElegido {
 	private void initialize(String nombreModulo) throws ClassNotFoundException {
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(IntfzModuloElegido.class.getResource("/Images/pyromikLogo.jpeg")));
-		frame.setBounds(100, 100, 1284, 620);
+		frame.setBounds(100, 100, 1366, 691);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
@@ -124,16 +124,16 @@ public class IntfzModuloElegido {
 		frame.setTitle("Modulo :"+mod.getNombre());
 
 		//CONSTRUCCION DE LA TABLA
-		//DEJAMOS LOS CANALES PARA FUTURAS IMPLEMENTACIONES
+		
 		String[] columnName = {"N","fecha y hora","Isc(A)","Voc(V)",
-				"Pmax(W)","IPmax(A)","VPmax(V)","FF(%)"};
+				"Pmax(W)","IPmax(A)","VPmax(V)","FF(%)","velViento","dirViento","Humedad","Temperatura","Irradiancia","RTD","Célula"};
 		Object [] [] data= new Object [0] [columnName.length];//array de objetos
 		frame.getContentPane().setLayout(null);
 		
 		
 //------PANEL DE CAMPAÑAS
 		JPanel panelCamp = new JPanel();
-		panelCamp.setBounds(0, 0, 823, 112);
+		panelCamp.setBounds(0, 0, 905, 112);
 		panelCamp.setBorder(new TitledBorder(null, "Campanyas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.getContentPane().add(panelCamp);
 		panelCamp.setLayout(null);
@@ -156,8 +156,8 @@ public class IntfzModuloElegido {
 						int i = 0;
 						for (CurvaOriginal co : Campanya.getCurvas(mod.getNombre(), list.getSelectedValue())) {
 							temp.addRow(new Object[] { i + 1, co.getFecha(), co.getIsc(), co.getVoc(), co.getPmax(),
-									co.getIPmax(), co.getVPmax(), co.getFF()
-
+									co.getIPmax(), co.getVPmax(), co.getFF(),
+									"0/0/0","0/0/0","0/0/0","0/0/0","0/0/0","0/0/0","0/0/0"
 							});
 							i++;
 						}
@@ -186,7 +186,7 @@ public class IntfzModuloElegido {
 		
 //------PANEL CURVAS	
 		panelCurva = new JPanel();
-		panelCurva.setBounds(0, 123, 823, 456);
+		panelCurva.setBounds(0, 123, 905, 518);
 		panelCurva.setBorder(new TitledBorder(null, "Curvas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.getContentPane().add(panelCurva);
 		panelCurva.setLayout(null);
@@ -278,7 +278,7 @@ public class IntfzModuloElegido {
 		tablaCurvas.setComponentPopupMenu(popupMenu);//se lo asociamos a la tabla
 		
 		JScrollPane scrollPane = new JScrollPane(tablaCurvas);
-		scrollPane.setBounds(20, 22, 793, 389);
+		scrollPane.setBounds(20, 22, 875, 447);
 		panelCurva.add(scrollPane);
 		
 		//-----BOTON CORREGIR
@@ -316,7 +316,7 @@ public class IntfzModuloElegido {
 			}
 		});
 
-		btnCorregir.setBounds(724, 422, 89, 23);
+		btnCorregir.setBounds(806, 480, 89, 23);
 		panelCurva.add(btnCorregir);	
 		
 		//------BOTON ELIMINAR		
@@ -346,7 +346,7 @@ public class IntfzModuloElegido {
 				
 			}
 		});
-		btnEliminar.setBounds(334, 422, 89, 23);
+		btnEliminar.setBounds(20, 480, 89, 23);
 		panelCurva.add(btnEliminar);
 									
 
@@ -554,7 +554,7 @@ public class IntfzModuloElegido {
 //---------PANEL GRAFICO
 		
 		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(833, 0, 435, 579);
+		layeredPane.setBounds(915, 0, 435, 641);
 		layeredPane.setBorder(BorderFactory.createTitledBorder(
                 "Representación gráfica"));
 		frame.getContentPane().add(layeredPane);
@@ -601,7 +601,7 @@ public class IntfzModuloElegido {
         layeredPane.add(tablaGraf);       
         
         scrollPane_1 = new JScrollPane(tablaGraf);
-        scrollPane_1.setBounds(10, 283, 415, 285);
+        scrollPane_1.setBounds(10, 283, 415, 347);
         layeredPane.add(scrollPane_1);
         
 		
