@@ -62,20 +62,18 @@ public class Modulo {
 			vpmaxNOCT=Double.parseDouble(elemento[11].toString());
 			
 			rendimiento=Double.parseDouble(elemento[12].toString());
-			idealidad=Double.parseDouble(elemento[13].toString());
 			resistencia=Double.parseDouble(elemento[14].toString());
+			idealidad=Double.parseDouble(elemento[13].toString());
 			
 			minISC=Double.parseDouble(elemento[15].toString());
 			minVOC=Double.parseDouble(elemento[16].toString());
-			minPMAX=Double.parseDouble(elemento[17].toString());
 			minFF=Double.parseDouble(elemento[18].toString());
+			minPMAX=Double.parseDouble(elemento[17].toString());
 			
 			celSerie = Integer.parseInt(elemento[19].toString());
 			celSerie =Integer.parseInt(elemento[20].toString());
 			
-
 		}
-
 	}
 
 	public Modulo(String name,double a,double b,double g,double k){
