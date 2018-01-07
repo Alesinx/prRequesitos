@@ -52,9 +52,7 @@ public class Modulo {
 			beta = (Double.parseDouble(elemento[2].toString()));
 			gamma = (Double.parseDouble(elemento[3].toString()));
 			kappa = (Double.parseDouble(elemento[4].toString()));
-
 		}
-
 	}
 
 	public Modulo(String name,double a,double b,double g,double k){
