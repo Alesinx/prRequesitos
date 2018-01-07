@@ -334,14 +334,6 @@ public class ImportarCurva {
 		BDConnection miBD = new BDConnection();
 		List<Object[]> auxM = miBD.Select("SELECT * FROM MODULO WHERE nombreModulo LIKE '"+moduleName+"' ;");
 
-		Canal cVelocidadViento = new Canal(0,viento,vientoInic,vientoFin,"Velocidad viento","m/s");
-		Canal cDireccionViento = new Canal(0, direccion, direccionInic, direccionFin, "Direccion viento", "º");
-		Canal cHumedad = new Canal(0, humedad, humedadInic, humedadFin, "Humedad relativa", "%");
-		Canal cTemperatura = new Canal(0, temp, tempInic, tempFin, "Temperatura ambiente", "ºC");
-		Canal cIrradiancia = new Canal(0, irr, irrInic, irrFin, "Piranometro seguidor", "W/m2");
-		Canal cRTD = new Canal(0, rtd, rtdInic, rtdFin,"RTD","ºC");
-		Canal cCelula = new Canal(0, cel, celInic, celFin, "Celula isofoton seguidor", "A");
-
 		if(auxM.isEmpty()) { // Si el modulo al que pertenece la curva no esta en la BD
 			Modulo auxModule = new Modulo(moduleName, "", 0, 0, 0, 0, 0,0,0,0,0
 					, 0,0,0,0,0,0,0,0,0,0); // Creamos el modulo con solo el nombre
@@ -351,6 +343,14 @@ public class ImportarCurva {
 		System.out.println(inte.toString());
 
 		CurvaOriginal auxCurva = new CurvaOriginal(isc, voc, pmax,ipmax, vpmax, ff, vol.toString(),inte.toString(), fecha,hora,campanya,moduleName);
+
+		Canal cVelocidadViento = new Canal(auxCurva,0,viento,vientoInic,vientoFin,"Velocidad viento","m/s");
+		Canal cDireccionViento = new Canal(auxCurva,0, direccion, direccionInic, direccionFin, "Direccion viento", "º");
+		Canal cHumedad = new Canal(auxCurva,0, humedad, humedadInic, humedadFin, "Humedad relativa", "%");
+		Canal cTemperatura = new Canal(auxCurva,0, temp, tempInic, tempFin, "Temperatura ambiente", "ºC");
+		Canal cIrradiancia = new Canal(auxCurva,0, irr, irrInic, irrFin, "Piranometro seguidor", "W/m2");
+		Canal cRTD = new Canal(auxCurva,0, rtd, rtdInic, rtdFin,"RTD","ºC");
+		Canal cCelula = new Canal(auxCurva,0, cel, celInic, celFin, "Celula isofoton seguidor", "A");
 
 		auxCurva.setCanal(cVelocidadViento,cDireccionViento,cHumedad,cTemperatura,cIrradiancia,cRTD,cCelula);
 

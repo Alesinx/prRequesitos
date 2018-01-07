@@ -68,6 +68,10 @@ public class CurvaOriginal implements curva {
 		sIn.close();
 		sVo.close();
 	}
+	
+	// En el query SELECT para sacar los canales referentes a esta curva original, me traigo los 3 valores,
+	// el nombre de la medida y la magnitud, where (y le paso fechahoracurva, el nombre de la campanya y el
+	// del modulo) nombreMedida like Velocidad Viento (por ejemplo) y los demas
 
 
 	public CurvaOriginal(String fechaCurva,String mod) throws ClassNotFoundException {
@@ -106,6 +110,8 @@ public class CurvaOriginal implements curva {
 
 				puntos.put(v, c);
 			}
+			
+			
 
 
 			sIn.close();
