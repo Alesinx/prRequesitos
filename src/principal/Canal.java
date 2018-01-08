@@ -32,12 +32,26 @@ public class Canal {
 		BDConnection miBD = new BDConnection();
 		miBD.Insert("INSERT INTO CANAL VALUES("+i+","+vi+","+vm+","+vf+",'"+name+"','"+med+"','"+c.getFechaHora()+"','"+c.getCampName()+"','"+c.getModName()+"');");
 	}
-	
-	public Canal(){ // Este carga los valores
-		
+
+	public Canal(String nombre, String fechaHora, String camp, String mod) throws ClassNotFoundException {
+
+		BDConnection miBD = new BDConnection();
+		Object [] aux = miBD.Select("SELECT * FROM Canal WHERE nombreMedida LIKE '"+nombre+"' AND curvaOriginal_fechaHoraCurva LIKE '"+fechaHora+"';").get(0);
+
+		this.id = Integer.parseInt(aux[0].toString());
+		this.valorInicial = Double.parseDouble(aux[1].toString());
+		this.valorMedio = Double.parseDouble(aux[2].toString());
+		this.valorFinal = Double.parseDouble(aux[3].toString());
+		this.nombre = aux[4].toString();
+		this.medida = aux[5].toString();
+
+		this.curva=null;
 	}
 
+
 	//------Getters
+
+
 
 	public double getValorMedio() {
 		return valorMedio;

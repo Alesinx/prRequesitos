@@ -345,12 +345,12 @@ public class ImportarCurva {
 		CurvaOriginal auxCurva = new CurvaOriginal(isc, voc, pmax,ipmax, vpmax, ff, vol.toString(),inte.toString(), fecha,hora,campanya,moduleName);
 
 		Canal cVelocidadViento = new Canal(auxCurva,0,viento,vientoInic,vientoFin,"Velocidad viento","m/s");
-		Canal cDireccionViento = new Canal(auxCurva,0, direccion, direccionInic, direccionFin, "Direccion viento", "º");
-		Canal cHumedad = new Canal(auxCurva,0, humedad, humedadInic, humedadFin, "Humedad relativa", "%");
-		Canal cTemperatura = new Canal(auxCurva,0, temp, tempInic, tempFin, "Temperatura ambiente", "ºC");
-		Canal cIrradiancia = new Canal(auxCurva,0, irr, irrInic, irrFin, "Piranometro seguidor", "W/m2");
-		Canal cRTD = new Canal(auxCurva,0, rtd, rtdInic, rtdFin,"RTD","ºC");
-		Canal cCelula = new Canal(auxCurva,0, cel, celInic, celFin, "Celula isofoton seguidor", "A");
+		Canal cDireccionViento = new Canal(auxCurva,1, direccion, direccionInic, direccionFin, "Direccion viento", "º");
+		Canal cHumedad = new Canal(auxCurva,2, humedad, humedadInic, humedadFin, "Humedad relativa", "%");
+		Canal cTemperatura = new Canal(auxCurva,3, temp, tempInic, tempFin, "Temperatura ambiente", "ºC");
+		Canal cIrradiancia = new Canal(auxCurva,4, irr, irrInic, irrFin, "Piranometro seguidor", "W/m2");
+		Canal cRTD = new Canal(auxCurva,5, rtd, rtdInic, rtdFin,"RTD","ºC");
+		Canal cCelula = new Canal(auxCurva,6, cel, celInic, celFin, "Celula isofoton seguidor", "A");
 
 		auxCurva.setCanal(cVelocidadViento,cDireccionViento,cHumedad,cTemperatura,cIrradiancia,cRTD,cCelula);
 

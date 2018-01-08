@@ -67,11 +67,14 @@ public class CurvaOriginal implements curva {
 
 		sIn.close();
 		sVo.close();
+
 	}
-	
+
 	// En el query SELECT para sacar los canales referentes a esta curva original, me traigo los 3 valores,
 	// el nombre de la medida y la magnitud, where (y le paso fechahoracurva, el nombre de la campanya y el
 	// del modulo) nombreMedida like Velocidad Viento (por ejemplo) y los demas
+
+
 
 
 	public CurvaOriginal(String fechaCurva,String mod) throws ClassNotFoundException {
@@ -110,24 +113,31 @@ public class CurvaOriginal implements curva {
 
 				puntos.put(v, c);
 			}
-			
-			
-
 
 			sIn.close();
 			sVo.close();
+
+			velViento = new Canal("Velocidad viento",this.fechaHora,campName,modName);
+			dirViento = new Canal("Direccion viento",this.fechaHora,campName,modName);
+			humedad = new Canal("Humedad relativa",this.fechaHora,campName,modName);
+			temperatura = new Canal("Temperatura ambiente",this.fechaHora,campName,modName);
+			irradiancia = new Canal("Piranometro seguidor",this.fechaHora,campName,modName);
+			rtd = new Canal("RTD",this.fechaHora,campName,modName);
+			celula = new Canal("Celula isofoton seguidor",this.fechaHora,campName,modName);
+
+			this.setCanal(velViento, dirViento, humedad, temperatura, irradiancia, rtd, celula);
 		}
 	}
 
 	public  List<CurvaCorregida> listaDeCurvasCorregidas() throws ClassNotFoundException{
 		BDConnection miBD = new BDConnection();
 		ArrayList<CurvaCorregida> lista = new ArrayList<CurvaCorregida>();
-		
+
 		for(Object[] elemento : miBD.Select("SELECT idCurvaCorregida FROM curvaCorregida where curvaOriginal_fechaHoraCurva = '" + fechaHora + "' AND orig_camp_nModulo = '"+modName+"' ;")){
-			
+
 			lista.add( new CurvaCorregida( Integer.parseInt(elemento[0].toString()) ) );
-			
-			
+
+
 		}
 		return lista;
 	}
@@ -273,6 +283,7 @@ public class CurvaOriginal implements curva {
 		this.rtd.setCurvaOriginal(this);
 		this.celula.setCurvaOriginal(this);
 	}
+
 	public void Borrar() throws ClassNotFoundException{
 		BDConnection miBD = new BDConnection();
 		miBD.Delete("DELETE FROM curvaOriginal WHERE fechaHoraCurva = '"+this.fechaHora+"' AND campanya_nombreModulo = '"+this.modName+"';");
