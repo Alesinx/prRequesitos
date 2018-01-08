@@ -125,8 +125,8 @@ public class IntfzModuloElegido {
 
 		//CONSTRUCCION DE LA TABLA
 		
-		String[] columnName = {"N","fecha y hora","Isc(A)","Voc(V)",
-				"Pmax(W)","IPmax(A)","VPmax(V)","FF(%)","velViento","dirViento","Humedad","Temperatura","Irradiancia","RTD","Célula"};
+		String[] columnName = {"fecha y hora","Isc(A)","Voc(V)",
+				"Pmax(W)","IPmax(A)","VPmax(V)","FF(%)","velViento(m/s)","dirViento(º)","Humedad(%)","Temperatura(ºC)","Irradiancia(W/m^2)","RTD(ºC)","Célula(A)"};
 		Object [] [] data= new Object [0] [columnName.length];//array de objetos
 		frame.getContentPane().setLayout(null);
 		
@@ -154,10 +154,24 @@ public class IntfzModuloElegido {
 					try {
 
 						int i = 0;
+						
 						for (CurvaOriginal co : Campanya.getCurvas(mod.getNombre(), list.getSelectedValue())) {
-							temp.addRow(new Object[] { i + 1, co.getFecha(), co.getIsc(), co.getVoc(), co.getPmax(),
+							Canal vv = co.getVelViento();
+							Canal dv = co.getDirViento();
+							Canal hr = co.getHumedad();
+							Canal t = co.getTemperatura();
+							Canal ir = co.getIrradiancia();
+							Canal rtd = co.getRtd();
+							Canal cel = co.getCelula();
+							temp.addRow(new Object[] { co.getFecha(), co.getIsc(), co.getVoc(), co.getPmax(),
 									co.getIPmax(), co.getVPmax(), co.getFF(),
-									"0/0/0","0/0/0","0/0/0","0/0/0","0/0/0","0/0/0","0/0/0"
+									vv.getValorInicial()+"/"+vv.getValorMedio()+"/"+vv.getValorFinal(),
+									dv.getValorInicial()+"/"+dv.getValorMedio()+"/"+dv.getValorFinal(),
+									hr.getValorInicial()+"/"+hr.getValorMedio()+"/"+hr.getValorFinal(),
+									t.getValorInicial()+"/"+t.getValorMedio()+"/"+t.getValorFinal(),
+									ir.getValorInicial()+"/"+ir.getValorMedio()+"/"+ir.getValorFinal(),
+									rtd.getValorInicial()+"/"+rtd.getValorMedio()+"/"+rtd.getValorFinal(),
+									cel.getValorInicial()+"/"+cel.getValorMedio()+"/"+cel.getValorFinal()
 							});
 							i++;
 						}
@@ -203,7 +217,7 @@ public class IntfzModuloElegido {
 				CurvaOriginal a = null;
 				//obtenemos la curva
 				try {
-					a = new CurvaOriginal( tablaCurvas.getValueAt(seleccion, 1).toString(),mod.getNombre()); //obtiene la curva
+					a = new CurvaOriginal( tablaCurvas.getValueAt(seleccion, 0).toString(),mod.getNombre()); //obtiene la curva
 				} catch (ClassNotFoundException e) {
 					
 					JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR!",JOptionPane.ERROR_MESSAGE);
@@ -262,7 +276,7 @@ public class IntfzModuloElegido {
             	int seleccion = tablaCurvas.getSelectedRow();
             	CurvaOriginal a;
 				try {
-					a = new CurvaOriginal(tablaCurvas.getValueAt(seleccion, 1).toString(), mod.getNombre() );
+					a = new CurvaOriginal(tablaCurvas.getValueAt(seleccion, 0).toString(), mod.getNombre() );
 					System.out.println(a.listaDeCurvasCorregidas());
 					IntfzListaCurvasCorregidas lcc = new IntfzListaCurvasCorregidas(a);
 					lcc.newScreen(a);
