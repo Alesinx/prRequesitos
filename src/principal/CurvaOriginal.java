@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 import interfaz.BDConnection;
 
-public class CurvaOriginal implements curva {
+public class CurvaOriginal {
 
 	private int idCurva;
 
@@ -67,11 +67,8 @@ public class CurvaOriginal implements curva {
 
 		sIn.close();
 		sVo.close();
+
 	}
-	
-	// En el query SELECT para sacar los canales referentes a esta curva original, me traigo los 3 valores,
-	// el nombre de la medida y la magnitud, where (y le paso fechahoracurva, el nombre de la campanya y el
-	// del modulo) nombreMedida like Velocidad Viento (por ejemplo) y los demas
 
 
 	public CurvaOriginal(String fechaCurva,String mod) throws ClassNotFoundException {
@@ -110,24 +107,31 @@ public class CurvaOriginal implements curva {
 
 				puntos.put(v, c);
 			}
-			
-			
-
 
 			sIn.close();
 			sVo.close();
+
+			velViento = new Canal("Velocidad viento",this.fechaHora,campName,modName);
+			dirViento = new Canal("Direccion viento",this.fechaHora,campName,modName);
+			humedad = new Canal("Humedad relativa",this.fechaHora,campName,modName);
+			temperatura = new Canal("Temperatura ambiente",this.fechaHora,campName,modName);
+			irradiancia = new Canal("Piranometro seguidor",this.fechaHora,campName,modName);
+			rtd = new Canal("RTD",this.fechaHora,campName,modName);
+			celula = new Canal("Celula isofoton seguidor",this.fechaHora,campName,modName);
+
+			this.setCanal(velViento, dirViento, humedad, temperatura, irradiancia, rtd, celula);
 		}
 	}
 
 	public  List<CurvaCorregida> listaDeCurvasCorregidas() throws ClassNotFoundException{
 		BDConnection miBD = new BDConnection();
 		ArrayList<CurvaCorregida> lista = new ArrayList<CurvaCorregida>();
-		
+
 		for(Object[] elemento : miBD.Select("SELECT idCurvaCorregida FROM curvaCorregida where curvaOriginal_fechaHoraCurva = '" + fechaHora + "' AND orig_camp_nModulo = '"+modName+"' ;")){
-			
+
 			lista.add( new CurvaCorregida( Integer.parseInt(elemento[0].toString()) ) );
-			
-			
+
+
 		}
 		return lista;
 	}
@@ -229,16 +233,6 @@ public class CurvaOriginal implements curva {
 	}
 
 
-	// Este metodo esta desfasado
-	public void mostrarDatos(){
-		int i = 0;
-		for (parIV p : pts){
-			System.out.println("PARIV" + i + "[Intensidad = " + p.getIntensidad() + "] ; [Voltaje = " + p.getVoltaje() + "]");
-			i++;
-		}
-	}
-
-
 	public int getIdCurva() {
 		return idCurva;
 	}
@@ -254,6 +248,33 @@ public class CurvaOriginal implements curva {
 		return fechaHora;
 	}
 
+	public Canal getVelViento() {
+		return velViento;
+	}
+
+	public Canal getDirViento() {
+		return dirViento;
+	}
+
+	public Canal getHumedad() {
+		return humedad;
+	}
+
+	public Canal getTemperatura() {
+		return temperatura;
+	}
+
+	public Canal getIrradiancia() {
+		return irradiancia;
+	}
+
+	public Canal getRtd() {
+		return rtd;
+	}
+
+	public Canal getCelula() {
+		return celula;
+	}
 
 	public void setCanal(Canal cVelocidadViento, Canal cDireccionViento, Canal cHumedad, Canal cTemperatura,
 			Canal cIrradiancia, Canal cRTD, Canal cCelula) {
@@ -265,15 +286,19 @@ public class CurvaOriginal implements curva {
 		this.rtd=cRTD;
 		this.celula=cCelula;
 
-		this.velViento.setCurvaOriginal(this);
-		this.dirViento.setCurvaOriginal(this);
-		this.humedad.setCurvaOriginal(this);
-		this.temperatura.setCurvaOriginal(this);
-		this.irradiancia.setCurvaOriginal(this);
-		this.rtd.setCurvaOriginal(this);
-		this.celula.setCurvaOriginal(this);
 	}
+
 	public void Borrar() throws ClassNotFoundException{
+
+		// Borra los canales de la BD
+		this.velViento.Borrar();
+		this.dirViento.Borrar();
+		this.humedad.Borrar();
+		this.irradiancia.Borrar();
+		this.celula.Borrar();
+		this.rtd.Borrar();
+		this.temperatura.Borrar();
+
 		BDConnection miBD = new BDConnection();
 		miBD.Delete("DELETE FROM curvaOriginal WHERE fechaHoraCurva = '"+this.fechaHora+"' AND campanya_nombreModulo = '"+this.modName+"';");
 		this.Isc = -1;
@@ -282,10 +307,11 @@ public class CurvaOriginal implements curva {
 		this.IPmax = -1;
 		this.VPmax = -1;
 		this.FF = -1;
-		//TODO : DEBE DE BORRAR LOS CANALES 
 		this.puntos = null;
 		this.modName = null;
 		this.campName = null;
+
+
 	}
 
 

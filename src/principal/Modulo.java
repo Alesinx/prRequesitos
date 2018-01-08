@@ -54,25 +54,25 @@ public class Modulo {
 			kappa = (Double.parseDouble(elemento[4].toString()));
 			tecnologia = elemento[5].toString();
 			temperaturaNOCT = Double.parseDouble(elemento[6].toString());
-			
+
 			iscNOCT= Double.parseDouble(elemento[7].toString());
 			vocNOCT=Double.parseDouble(elemento[8].toString());
 			pmaxNOCT = Double.parseDouble(elemento[9].toString());
 			ipmaxNOCT=Double.parseDouble(elemento[10].toString());
 			vpmaxNOCT=Double.parseDouble(elemento[11].toString());
-			
+
 			rendimiento=Double.parseDouble(elemento[12].toString());
 			resistencia=Double.parseDouble(elemento[14].toString());
 			idealidad=Double.parseDouble(elemento[13].toString());
-			
+
 			minISC=Double.parseDouble(elemento[15].toString());
 			minVOC=Double.parseDouble(elemento[16].toString());
 			minFF=Double.parseDouble(elemento[18].toString());
 			minPMAX=Double.parseDouble(elemento[17].toString());
-			
+
 			celSerie = Integer.parseInt(elemento[19].toString());
 			celSerie =Integer.parseInt(elemento[20].toString());
-			
+
 		}
 	}
 
@@ -212,7 +212,7 @@ public class Modulo {
 			mod.setBeta(Double.parseDouble(elemento[2].toString()));
 			mod.setGamma(Double.parseDouble(elemento[3].toString()));
 			mod.setKappa(Double.parseDouble(elemento[4].toString()));
-			
+
 			mod.setTecnologia(elemento[5].toString());
 			mod.setTemperaturaNOCT(Double.parseDouble(elemento[6].toString()));
 			mod.setIscNOCT(Double.parseDouble(elemento[7].toString()));
@@ -220,19 +220,19 @@ public class Modulo {
 			mod.setPmaxNOCT(Double.parseDouble(elemento[9].toString()));
 			mod.setIpmaxNOCT(Double.parseDouble(elemento[10].toString()));
 			mod.setVpmaxNOCT(Double.parseDouble(elemento[11].toString()));
-			
+
 			mod.setRendimiento(Double.parseDouble(elemento[12].toString()));
 			mod.setIdealidad(Double.parseDouble(elemento[13].toString()));
 			mod.setResistencia(Double.parseDouble(elemento[14].toString()));
-			
+
 			mod.setMinISC(Double.parseDouble(elemento[15].toString()));
 			mod.setMinVOC(Double.parseDouble(elemento[16].toString()));
 			mod.setMinPMAX(Double.parseDouble(elemento[17].toString()));
 			mod.setMinFF(Double.parseDouble(elemento[18].toString()));
-			
+
 			mod.setCelSerie(Integer.parseInt(elemento[19].toString()));
 			mod.setCelSerie(Integer.parseInt(elemento[20].toString()));
-			
+
 			lista.add(mod);
 		}
 		return lista;
@@ -473,16 +473,5 @@ public class Modulo {
 
 	public void anyadirCurva (CurvaOriginal c){
 		curvas.add(c);
-	}
-
-	public void mostrarCurvas(){
-		for (curva c : curvas){
-			c.mostrarDatos();
-		}
-	}
-
-	public void setCurva(ArrayList<curva> curvas2) {
-		// TODO Auto-generated method stub
-
 	}
 }

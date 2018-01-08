@@ -109,7 +109,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double viento = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(viento);
 
 		aux = sc.nextLine(); // -- VELOCIDAD VIENTO INICIAL
 		auxSC = new Scanner(aux);
@@ -118,7 +117,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double vientoInic = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(vientoInic);
 
 		aux = sc.nextLine(); // -- VELOCIDAD VIENTO FINAL
 		auxSC = new Scanner(aux);
@@ -127,8 +125,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double vientoFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(vientoFin);
-
+		System.out.println("Velocidad viento "+vientoInic+"/"+viento+"/"+vientoFin);
 
 		aux = sc.nextLine(); // -- DIRECCION VIENTO
 		auxSC = new Scanner(aux);
@@ -136,7 +133,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double direccion = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(direccion);
 
 		aux = sc.nextLine(); // -- DIRECCION VIENTO INICIAL
 		auxSC = new Scanner(aux);
@@ -145,7 +141,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double direccionInic = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(direccionInic);
 
 		aux = sc.nextLine(); // -- DIRECCION VIENTO FINAL
 		auxSC = new Scanner(aux);
@@ -154,7 +149,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double direccionFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(direccionFin);
+		System.out.println("Direccion viento "+direccionInic+"/"+direccion+"/"+direccionFin);
 
 		aux = sc.nextLine(); // -- HUMEDAD
 		auxSC = new Scanner(aux);
@@ -162,7 +157,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double humedad = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(humedad);
 
 		aux = sc.nextLine(); // -- HUMEDAD INICIAL
 		auxSC = new Scanner(aux);
@@ -171,7 +165,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double humedadInic = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(humedadInic);
 
 		aux = sc.nextLine(); // -- HUMEDAD FINAL
 		auxSC = new Scanner(aux);
@@ -180,7 +173,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double humedadFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(humedadFin);
+		System.out.println("Humedad relativa "+humedadInic+"/"+humedad+"/"+humedadFin);
 
 		aux = sc.nextLine(); // -- TEMPERATURA AMBIENTE
 		auxSC = new Scanner(aux);
@@ -206,7 +199,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double tempFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(tempFin);
+		System.out.println("Temperatura ambiente "+tempInic+"/"+temp+"/"+tempFin);
 
 		aux = sc.nextLine(); // -- IRRADIANCIA
 		auxSC = new Scanner(aux);
@@ -214,7 +207,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double irr = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(irr);
 
 		aux = sc.nextLine(); // -- IRRADIANCIA INICIAL
 		auxSC = new Scanner(aux);
@@ -223,7 +215,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double irrInic = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(irrInic);
 
 		aux = sc.nextLine(); // -- IRRADIANCIA FINAL
 		auxSC = new Scanner(aux);
@@ -232,7 +223,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double irrFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(irrFin);
+		System.out.println("Irradiancia "+irrInic+"/"+irr+"/"+irrFin);
 
 		aux = sc.nextLine(); // -- RTD
 		auxSC = new Scanner(aux);
@@ -240,7 +231,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double rtd = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(rtd);
 
 		aux = sc.nextLine(); // -- RTD INICIAL
 		auxSC = new Scanner(aux);
@@ -249,7 +239,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double rtdInic = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(rtdInic);
 
 		aux = sc.nextLine(); // -- RTD FINAL
 		auxSC = new Scanner(aux);
@@ -258,7 +247,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double rtdFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(rtdFin);
+		System.out.println("RTD "+rtdInic+"/"+rtd+"/"+rtdFin);
 
 		aux = sc.nextLine(); // -- CELULA ISOFOTON
 		auxSC = new Scanner(aux);
@@ -267,7 +256,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double cel = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(cel);
 
 		aux = sc.nextLine(); // -- CELULA ISOFOTON INICIAL
 		auxSC = new Scanner(aux);
@@ -277,7 +265,6 @@ public class ImportarCurva {
 		auxSC.next();
 		double celInic = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(celInic);
 
 		aux = sc.nextLine(); // -- CELULA ISOFOTON INICIAL
 		auxSC = new Scanner(aux);
@@ -287,7 +274,7 @@ public class ImportarCurva {
 		auxSC.next();
 		double celFin = auxSC.nextDouble();
 		auxSC.close();
-		System.out.println(celFin);
+		System.out.println("Celula isofoton "+celInic+"/"+cel+"/"+celFin);
 
 		sc.nextLine();
 
@@ -345,12 +332,12 @@ public class ImportarCurva {
 		CurvaOriginal auxCurva = new CurvaOriginal(isc, voc, pmax,ipmax, vpmax, ff, vol.toString(),inte.toString(), fecha,hora,campanya,moduleName);
 
 		Canal cVelocidadViento = new Canal(auxCurva,0,viento,vientoInic,vientoFin,"Velocidad viento","m/s");
-		Canal cDireccionViento = new Canal(auxCurva,0, direccion, direccionInic, direccionFin, "Direccion viento", "º");
-		Canal cHumedad = new Canal(auxCurva,0, humedad, humedadInic, humedadFin, "Humedad relativa", "%");
-		Canal cTemperatura = new Canal(auxCurva,0, temp, tempInic, tempFin, "Temperatura ambiente", "ºC");
-		Canal cIrradiancia = new Canal(auxCurva,0, irr, irrInic, irrFin, "Piranometro seguidor", "W/m2");
-		Canal cRTD = new Canal(auxCurva,0, rtd, rtdInic, rtdFin,"RTD","ºC");
-		Canal cCelula = new Canal(auxCurva,0, cel, celInic, celFin, "Celula isofoton seguidor", "A");
+		Canal cDireccionViento = new Canal(auxCurva,1, direccion, direccionInic, direccionFin, "Direccion viento", "º");
+		Canal cHumedad = new Canal(auxCurva,2, humedad, humedadInic, humedadFin, "Humedad relativa", "%");
+		Canal cTemperatura = new Canal(auxCurva,3, temp, tempInic, tempFin, "Temperatura ambiente", "ºC");
+		Canal cIrradiancia = new Canal(auxCurva,4, irr, irrInic, irrFin, "Piranometro seguidor", "W/m2");
+		Canal cRTD = new Canal(auxCurva,5, rtd, rtdInic, rtdFin,"RTD","ºC");
+		Canal cCelula = new Canal(auxCurva,6, cel, celInic, celFin, "Celula isofoton seguidor", "A");
 
 		auxCurva.setCanal(cVelocidadViento,cDireccionViento,cHumedad,cTemperatura,cIrradiancia,cRTD,cCelula);
 
