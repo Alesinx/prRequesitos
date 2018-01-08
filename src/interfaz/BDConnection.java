@@ -4,14 +4,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class BDConnection {
 	private Connection connection = null;
-	
-	
+
+
 	public BDConnection() throws ClassNotFoundException {
 		Class.forName("org.sqlite.JDBC");
 
-		
+
 		try {
 			// create a database connection
 			connection = DriverManager.getConnection("jdbc:sqlite:src/BD/PVTranslator.db");
@@ -34,7 +36,7 @@ public class BDConnection {
 		}
 
 	}
-	
+
 	public List<Object[]> Select(String sel)
 	{
 		ResultSet rset;
@@ -61,10 +63,10 @@ public class BDConnection {
 		{
 			throw new Error("Error en el SELECT: " + sel+ ". " + ex.getMessage());
 		}		
-		
+
 		return lista;
 	}
-	
+
 	public void Insert(String ins)
 	{
 		try
@@ -75,7 +77,11 @@ public class BDConnection {
 		}
 		catch (SQLException ex)
 		{
-			throw new Error("Error en el INSERT: " + ins+ ". " + ex.getMessage());
+			if(ex.getErrorCode()==19) {
+				JOptionPane.showMessageDialog(null, "Esta curva ya esta en la BD","Error!",JOptionPane.ERROR_MESSAGE);
+			}else {
+				throw new Error("Error en el INSERT: " + ins+ ". " + ex.getMessage());
+			}
 		}
 	}
 
