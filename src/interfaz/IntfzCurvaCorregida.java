@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -76,6 +77,11 @@ public class IntfzCurvaCorregida extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+		
+		setTitle("Curva Corregida");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IntfzModuloElegido.class.getResource("/Images/pyromikLogo.jpeg")));
+
 		
 		 curva = cc;
 		
@@ -86,7 +92,7 @@ public class IntfzCurvaCorregida extends JFrame {
 		contentPane.add(lblCurvaCorregida);
 		
 		//CONSTRUCCION DE LA TABLA
-		String[] columnName = {"N","TensiÃ³n(V)","Corriente(A)","Potencia(W)"};
+		String[] columnName = {"N","Tensión(V)","Corriente(A)","Potencia(W)"};
 		
 		Object [] [] data= new Object [curva.getPts().size()] [columnName.length];//array de objetos
 		int i = 0;

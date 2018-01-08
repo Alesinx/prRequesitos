@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -118,6 +119,11 @@ public class IntfzPantallaInicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		setLocationRelativeTo(null);
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IntfzModuloElegido.class.getResource("/Images/pyromikLogo.jpeg")));
+
 
 
 		this.setTitle("PVTRANSLATOR");
@@ -428,7 +434,7 @@ public class IntfzPantallaInicio extends JFrame {
 		panelInicial.setVisible(true);
 		//------PANEL DE MODULO
 		panelModulo = new JPanel();
-		panelModulo.setBounds(0, 0, 575, 336);
+		panelModulo.setBounds(0, 0, 575, 381);
 		contentPane.add(panelModulo);
 		panelModulo.setLayout(null);
 		panelModulo.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -456,86 +462,86 @@ public class IntfzPantallaInicio extends JFrame {
 
 		list.setModel(modeloCamp);
 		panelModulo.add(list);
-		
-				button = new JButton("Atr\u00E1s");
-				button.setBounds(10, 347, 89, 23);
-				contentPane.add(button);
 				
-				
-						Elegir = new JButton("Elegir");
-						Elegir.setBounds(466, 347, 89, 23);
-						contentPane.add(Elegir);
+						JButton btnEditar = new JButton("Editar");
+						btnEditar.setBounds(376, 347, 89, 23);
+						panelModulo.add(btnEditar);
 						
-								JButton btnEditar = new JButton("Editar");
-								btnEditar.setBounds(367, 347, 89, 23);
-								contentPane.add(btnEditar);
-								btnEditar.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										if(list.getSelectedValue() != null) {
-											try {
-
-												Modulo mod = new Modulo(list.getSelectedValue());
-												//para que se vea el valor al entrar
-
-												//textField_nombre.setText(mod.getNombre());
-												textField_alpha.setText(String.valueOf(mod.getAlfa()));
-												textField_beta.setText(String.valueOf(mod.getBeta()));
-												textField_gamma.setText(String.valueOf(mod.getGamma()));
-												textField_kappa.setText(String.valueOf(mod.getKappa()));
-												textField_tecnologia.setText(String.valueOf(mod.getTecnologia()));
-												textField_tempNOCT.setText(String.valueOf(mod.getTemperaturaNOCT()));
-												textField_iscNOCT.setText(String.valueOf(mod.getIscNOCT()));
-												textField_vocNOCT.setText(String.valueOf(mod.getVocNOCT()));
-												textField_pmaxNOCT.setText(String.valueOf(mod.getPmaxNOCT()));
-												textField_ipmaxNOCT.setText(String.valueOf(mod.getIpmaxNOCT()));
-												textField_vpmaxNOCT.setText(String.valueOf(mod.getVpmaxNOCT()));
-												textField_rendimiento.setText(String.valueOf(mod.getRendimiento()));
-												textField_idealidad.setText(String.valueOf(mod.getIdealidad()));
-												textField_resistencia.setText(String.valueOf(mod.getResistencia()));
-												textField_minISC.setText(String.valueOf(mod.getMinISC()));
-												textField_minVOC.setText(String.valueOf(mod.getMinVOC()));
-												textField_minPMAX.setText(String.valueOf(mod.getMinPMAX()));
-												textField_minFF.setText(String.valueOf(mod.getMinFF()));
-												textField_celulasEnSerie.setText(String.valueOf(mod.getCelSerie()));
-												textField_celulasEnParalelo.setText(String.valueOf(mod.getCelParalelo()));
-
-
+						
+								Elegir = new JButton("Elegir");
+								Elegir.setBounds(476, 347, 89, 23);
+								panelModulo.add(Elegir);
+								
+										button = new JButton("Atr\u00E1s");
+										button.setBounds(10, 347, 89, 23);
+										panelModulo.add(button);
+										button.addActionListener(new ActionListener() {
+											public void actionPerformed(ActionEvent e) {
 												panelModulo.setVisible(false);
-												panelEditar.setVisible(true);
-
-											} catch (ClassNotFoundException e1) {
-												// TODO Auto-generated catch block
-												e1.printStackTrace();
+												panelInicial.setVisible(true);
 											}
+										});
+								Elegir.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										try {
+
+											if (list.getSelectedValue() != null) {
+												IntfzModuloElegido me = new IntfzModuloElegido(list.getSelectedValue());
+												me.newScreen(list.getSelectedValue());
+											}
+
+										} catch (ClassNotFoundException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
 										}
+										//-------
 									}
 								});
-						Elegir.addActionListener(new ActionListener() {
+						btnEditar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								try {
+								if(list.getSelectedValue() != null) {
+									try {
 
-									if (list.getSelectedValue() != null) {
-										IntfzModuloElegido me = new IntfzModuloElegido(list.getSelectedValue());
-										me.newScreen(list.getSelectedValue());
+										Modulo mod = new Modulo(list.getSelectedValue());
+										//para que se vea el valor al entrar
+
+										//textField_nombre.setText(mod.getNombre());
+										textField_alpha.setText(String.valueOf(mod.getAlfa()));
+										textField_beta.setText(String.valueOf(mod.getBeta()));
+										textField_gamma.setText(String.valueOf(mod.getGamma()));
+										textField_kappa.setText(String.valueOf(mod.getKappa()));
+										textField_tecnologia.setText(String.valueOf(mod.getTecnologia()));
+										textField_tempNOCT.setText(String.valueOf(mod.getTemperaturaNOCT()));
+										textField_iscNOCT.setText(String.valueOf(mod.getIscNOCT()));
+										textField_vocNOCT.setText(String.valueOf(mod.getVocNOCT()));
+										textField_pmaxNOCT.setText(String.valueOf(mod.getPmaxNOCT()));
+										textField_ipmaxNOCT.setText(String.valueOf(mod.getIpmaxNOCT()));
+										textField_vpmaxNOCT.setText(String.valueOf(mod.getVpmaxNOCT()));
+										textField_rendimiento.setText(String.valueOf(mod.getRendimiento()));
+										textField_idealidad.setText(String.valueOf(mod.getIdealidad()));
+										textField_resistencia.setText(String.valueOf(mod.getResistencia()));
+										textField_minISC.setText(String.valueOf(mod.getMinISC()));
+										textField_minVOC.setText(String.valueOf(mod.getMinVOC()));
+										textField_minPMAX.setText(String.valueOf(mod.getMinPMAX()));
+										textField_minFF.setText(String.valueOf(mod.getMinFF()));
+										textField_celulasEnSerie.setText(String.valueOf(mod.getCelSerie()));
+										textField_celulasEnParalelo.setText(String.valueOf(mod.getCelParalelo()));
+
+
+										panelModulo.setVisible(false);
+										panelEditar.setVisible(true);
+
+									} catch (ClassNotFoundException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
 									}
-
-								} catch (ClassNotFoundException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
 								}
-								//-------
 							}
 						});
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						panelModulo.setVisible(false);
-						panelInicial.setVisible(true);
-					}
-				});
 
 
 		panelModulo.setVisible(false);
-
+		panelEditar.setVisible(false);
 
 
 	}

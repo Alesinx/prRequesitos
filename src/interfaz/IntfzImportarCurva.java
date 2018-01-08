@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 
 public class IntfzImportarCurva extends JFrame {
@@ -61,6 +63,10 @@ public class IntfzImportarCurva extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IntfzModuloElegido.class.getResource("/Images/pyromikLogo.jpeg")));
+
 		
 		this.setTitle("PVTRANSLATOR");
 		
@@ -116,7 +122,7 @@ public class IntfzImportarCurva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (!textField.getText().isEmpty()) {
 					//QUE HACE EL BOTON
-					int reply = JOptionPane.showConfirmDialog(null, "Â¿EstÃ¡ seguro?", "Mensaje",
+					int reply = JOptionPane.showConfirmDialog(null, "¿Está seguro?", "Mensaje",
 							JOptionPane.YES_NO_OPTION);
 					if (reply == JOptionPane.YES_OPTION) {
 						IntfzPantallaInicio pi = new IntfzPantallaInicio();
@@ -136,7 +142,7 @@ public class IntfzImportarCurva extends JFrame {
 //-----TEXTO INFORMATIVO
 		JTextPane txtpnContenido = new JTextPane();
 		txtpnContenido.setBackground(UIManager.getColor("Button.background"));
-		txtpnContenido.setText("Asegurese de que el archivo tenga la extensiÃ³n .xls");
+		txtpnContenido.setText("Aseguresé de que el archivo tenga la extensión .xls");
 		txtpnContenido.setBounds(10, 84, 357, 118);
 		contentPane.add(txtpnContenido);
 //-----titulo

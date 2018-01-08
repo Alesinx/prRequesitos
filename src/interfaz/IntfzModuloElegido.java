@@ -115,7 +115,7 @@ public class IntfzModuloElegido {
 		frame.setBounds(100, 100, 1366, 691);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		
+		frame.setLocationRelativeTo(null);
 		//carga los datos del modulo
 		mod = new Modulo(nombreModulo);
 		listaDeCurvasACorregir = new ArrayList<CurvaOriginal>();
@@ -293,7 +293,7 @@ public class IntfzModuloElegido {
 		tablaCurvas.setComponentPopupMenu(popupMenu);//se lo asociamos a la tabla
 		
 		JScrollPane scrollPane = new JScrollPane(tablaCurvas);
-		scrollPane.setBounds(20, 22, 875, 447);
+		scrollPane.setBounds(10, 22, 875, 447);
 		panelCurva.add(scrollPane);
 		
 		//-----BOTON CORREGIR
@@ -337,7 +337,7 @@ public class IntfzModuloElegido {
 			}
 		});
 
-		btnCorregir.setBounds(806, 480, 89, 23);
+		btnCorregir.setBounds(796, 480, 89, 23);
 		panelCurva.add(btnCorregir);	
 		
 		//------BOTON ELIMINAR		
@@ -377,19 +377,19 @@ public class IntfzModuloElegido {
 		frame.getContentPane().add(panelCorreccion);
 		panelCorreccion.setLayout(null);
 
-		JLabel lblSeleccionarElMtodo = new JLabel("Seleccionar el m\u00E9todo de correci\u00F3n");
+		JLabel lblSeleccionarElMtodo = new JLabel("Seleccionar el método de correción");
 		lblSeleccionarElMtodo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarElMtodo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblSeleccionarElMtodo.setBounds(10, 11, 589, 54);
 		panelCorreccion.add(lblSeleccionarElMtodo);
 
-		JLabel lblMtodosDeCorrecin = new JLabel("M\u00E9todos de correci\u00F3n");
+		JLabel lblMtodosDeCorrecin = new JLabel("Métodos de correción");
 		lblMtodosDeCorrecin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMtodosDeCorrecin.setBounds(10, 76, 250, 14);
 		panelCorreccion.add(lblMtodosDeCorrecin);
 		//-----seleccionador
 		Choice choiceMetodo = new Choice();
-		choiceMetodo.add("IEC60891 mÃ©todo 1");
+		choiceMetodo.add("IEC60891 método 1");
 		choiceMetodo.setBounds(10, 96, 250, 20);
 		panelCorreccion.add(choiceMetodo);
 
@@ -469,7 +469,7 @@ public class IntfzModuloElegido {
 			public void actionPerformed(ActionEvent e) {
 				try {
 
-					if(choiceMetodo.getSelectedItem().equals("IEC60891 mÃ©todo 1")) {
+					if(choiceMetodo.getSelectedItem().equals("IEC60891 método 1")) {
 
 						//obtenemos la priemra curva
 						Iterator <CurvaOriginal> it = listaDeCurvasACorregir.iterator();
@@ -501,7 +501,7 @@ public class IntfzModuloElegido {
 		btnCorregir_1.setBounds(510, 216, 89, 42);
 		panelCorreccion.add(btnCorregir_1);
 		//------BOTON ATRAS
-		JButton btnAtras_correccion = new JButton("Atr\u00E1s");
+		JButton btnAtras_correccion = new JButton("Atrás");
 		btnAtras_correccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//tambien tiene que vaciar las curvas seleccionadas
@@ -611,7 +611,7 @@ public class IntfzModuloElegido {
         layeredPane.add(panelGrafica);
         panelGrafica.setName("A");
         
-        String[] columaGraf = {"N","TensiÃ³n(V)","Corriente(A)","Potencia(W)"};
+        String[] columaGraf = {"N","Tensión(V)","Corriente(A)","Potencia(W)"};
 		
 		
 		DefaultTableModel modelo = new DefaultTableModel(columaGraf, 0);
