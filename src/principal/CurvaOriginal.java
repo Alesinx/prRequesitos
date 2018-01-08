@@ -275,13 +275,6 @@ public class CurvaOriginal implements curva {
 		this.rtd=cRTD;
 		this.celula=cCelula;
 
-		this.velViento.setCurvaOriginal(this);
-		this.dirViento.setCurvaOriginal(this);
-		this.humedad.setCurvaOriginal(this);
-		this.temperatura.setCurvaOriginal(this);
-		this.irradiancia.setCurvaOriginal(this);
-		this.rtd.setCurvaOriginal(this);
-		this.celula.setCurvaOriginal(this);
 	}
 
 	public void Borrar() throws ClassNotFoundException{
@@ -293,10 +286,18 @@ public class CurvaOriginal implements curva {
 		this.IPmax = -1;
 		this.VPmax = -1;
 		this.FF = -1;
-		//TODO : DEBE DE BORRAR LOS CANALES 
 		this.puntos = null;
 		this.modName = null;
 		this.campName = null;
+
+		// Borra los canales de la BD
+		this.velViento.Borrar();
+		this.dirViento.Borrar();
+		this.humedad.Borrar();
+		this.irradiancia.Borrar();
+		this.celula.Borrar();
+		this.rtd.Borrar();
+		this.temperatura.Borrar();
 	}
 
 

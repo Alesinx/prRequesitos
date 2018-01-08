@@ -30,7 +30,7 @@ public class Canal {
 		curva=c;
 
 		BDConnection miBD = new BDConnection();
-		miBD.Insert("INSERT INTO CANAL VALUES("+i+","+vi+","+vm+","+vf+",'"+name+"','"+med+"','"+c.getFechaHora()+"','"+c.getCampName()+"','"+c.getModName()+"');");
+		miBD.Insert("INSERT INTO Canal VALUES("+i+","+vi+","+vm+","+vf+",'"+name+"','"+med+"','"+c.getFechaHora()+"','"+c.getCampName()+"','"+c.getModName()+"');");
 	}
 
 	public Canal(String nombre, String fechaHora, String camp, String mod) throws ClassNotFoundException {
@@ -118,8 +118,21 @@ public class Canal {
 		miBD.Update("UPDATE CANAL SET magnitudMedida = "+medida+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
 	}
 
-	public void setCurvaOriginal(CurvaOriginal c){
-		this.curva = c;
+
+	// -- BORRAR CANAL
+
+	public void Borrar() throws ClassNotFoundException{
+		BDConnection miBD = new BDConnection();
+		miBD.Delete("DELETE FROM Canal WHERE idCanal = "+this.id+" AND curvaOriginal_fechaHoraCurva LIKE '"+this.curva.getFechaHora()+"';");
+
+		this.id = -1;
+		this.valorInicial = -1;
+		this.valorMedio = -1;
+		this.valorFinal = -1;
+		this.nombre = "";
+		this.medida = "";
+
+		this.curva=null;
 	}
 
 }
