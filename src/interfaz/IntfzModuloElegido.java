@@ -66,9 +66,7 @@ public class IntfzModuloElegido {
 	private JTextField txtfBetta;
 	private JTextField txtfRs;
 	private JTextField txtfKappa;
-	private JTextField txtfT1;
 	private JTextField txtfT2;
-	private JTextField txtfIrr1;
 	private JTextField txtfIrr2;
 	
 	private JLayeredPane layeredPane;
@@ -76,6 +74,9 @@ public class IntfzModuloElegido {
 	ChartPanel panelGrafica;
 	private JTable tablaGraf;
 	private JScrollPane scrollPane_1;
+	
+	Choice choiceTemp= new Choice();;
+	Choice choiceIrra= new Choice();;
 
 	/**
 	 * Launch the application.
@@ -200,7 +201,7 @@ public class IntfzModuloElegido {
 		
 //------PANEL CURVAS	
 		panelCurva = new JPanel();
-		panelCurva.setBounds(0, 123, 905, 518);
+		panelCurva.setBounds(10, 123, 895, 518);
 		panelCurva.setBorder(new TitledBorder(null, "Curvas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.getContentPane().add(panelCurva);
 		panelCurva.setLayout(null);
@@ -281,7 +282,7 @@ public class IntfzModuloElegido {
 					IntfzListaCurvasCorregidas lcc = new IntfzListaCurvasCorregidas(a);
 					lcc.newScreen(a);
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
             	
@@ -309,7 +310,7 @@ public class IntfzModuloElegido {
 					for(int w=0;w<curvasSelecionadas.length;w++){
 						try {
 								//Basicamente metemos en la lista de curvas corregidas las seleccionasa
-								listaDeCurvasACorregir.add(new CurvaOriginal( tablaCurvas.getValueAt(curvasSelecionadas[w], 1).toString(),mod.getNombre() ) );
+								listaDeCurvasACorregir.add(new CurvaOriginal( tablaCurvas.getValueAt(curvasSelecionadas[w], 0).toString(),mod.getNombre() ) );
 									
 								} catch (ClassNotFoundException e1) {
 									
@@ -319,9 +320,15 @@ public class IntfzModuloElegido {
 					//coegmos los valores de la primera curva seleccionada
 					Iterator<CurvaOriginal> ic = listaDeCurvasACorregir.iterator();
 					CurvaOriginal temporal = ic.next();
-					//TODO CAMBIAR OR LA TEMP Y LA IRRADENCIA DE LOS CANALES
-					txtfT1.setText("valor del canal"); 	//cambiar con los canales
-					txtfIrr1.setText("valor del canal");	//cambiar con los canales
+					//obtener los canales y asiganrselos a los combobox
+					Canal IrrTemporal = temporal.getIrradiancia();
+					Canal tempTemporal = temporal.getTemperatura();
+					Canal tempTemporal_ = temporal.getRtd();//michel pide los que tengan las mismas unidades
+					
+					choiceIrra.add( String.valueOf(IrrTemporal.getValorInicial()) );choiceIrra.add( String.valueOf(IrrTemporal.getValorMedio()) );choiceIrra.add( String.valueOf(IrrTemporal.getValorFinal()) );
+					choiceTemp.add( String.valueOf(tempTemporal.getValorInicial()) );choiceTemp.add( String.valueOf(tempTemporal.getValorMedio()) );choiceTemp.add( String.valueOf(tempTemporal.getValorFinal()) );
+					choiceTemp.add( String.valueOf(tempTemporal_.getValorInicial()) );choiceTemp.add( String.valueOf(tempTemporal_.getValorMedio()) );choiceTemp.add( String.valueOf(tempTemporal_.getValorFinal()) );
+
 					panelCurva.setVisible(false);
 					panelCamp.setVisible(false);
 					panelCorreccion.setVisible(true);
@@ -349,7 +356,7 @@ public class IntfzModuloElegido {
 							curvaDeleted.Borrar();
 							temp.removeRow(selected);
 						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 						JOptionPane.showMessageDialog(null, "Se ha borrado la curva/s seleccionada/s","Info",JOptionPane.INFORMATION_MESSAGE);
@@ -366,7 +373,7 @@ public class IntfzModuloElegido {
 
 //------PANEL CORRECCION
 		panelCorreccion = new JPanel();
-		panelCorreccion.setBounds(0, 0, 823, 579);
+		panelCorreccion.setBounds(0, 0, 823, 652);
 		frame.getContentPane().add(panelCorreccion);
 		panelCorreccion.setLayout(null);
 
@@ -388,67 +395,74 @@ public class IntfzModuloElegido {
 
 		JLabel lblAlpha = new JLabel("Alpha");
 		lblAlpha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAlpha.setBounds(10, 146, 46, 14);
+		lblAlpha.setBounds(10, 185, 46, 14);
 		panelCorreccion.add(lblAlpha);
 
 		JLabel lblBetta = new JLabel("Betta");
 		lblBetta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBetta.setBounds(10, 171, 46, 14);
+		lblBetta.setBounds(10, 216, 46, 14);
 		panelCorreccion.add(lblBetta);
 
 		JLabel lblRs = new JLabel("Rs");
 		lblRs.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRs.setBounds(10, 196, 46, 14);
+		lblRs.setBounds(10, 244, 46, 14);
 		panelCorreccion.add(lblRs);
 
 		JLabel lblKappa = new JLabel("Kappa");
 		lblKappa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblKappa.setBounds(10, 221, 46, 14);
+		lblKappa.setBounds(10, 272, 46, 14);
 		panelCorreccion.add(lblKappa);
 
 		txtfAlpha = new JTextField();
-		txtfAlpha.setBounds(103, 143, 109, 20);
+		txtfAlpha.setBounds(103, 182, 109, 20);
 		txtfAlpha.setText(String.valueOf(mod.getAlfa()));	//valor por defecto del módulo
 		panelCorreccion.add(txtfAlpha);
 		txtfAlpha.setColumns(10);
 
 		txtfBetta = new JTextField();
-		txtfBetta.setBounds(103, 168, 109, 20);
+		txtfBetta.setBounds(103, 213, 109, 20);
 		txtfBetta.setText(String.valueOf(mod.getBeta()));	//valor por defecto del módulo
 		panelCorreccion.add(txtfBetta);
 		txtfBetta.setColumns(10);
 
 		txtfRs = new JTextField();
 		txtfRs.setText("0.0");
-		txtfRs.setBounds(103, 193, 109, 20);
+		txtfRs.setBounds(103, 241, 109, 20);
 		panelCorreccion.add(txtfRs);
 		txtfRs.setColumns(10);
 
 		txtfKappa = new JTextField();
-		txtfKappa.setBounds(103, 218, 109, 20);
+		txtfKappa.setBounds(103, 269, 109, 20);
 		txtfKappa.setText(String.valueOf(mod.getKappa()));	//valor por defecto del módulo
 		panelCorreccion.add(txtfKappa);
 		txtfKappa.setColumns(10);
 
 		JLabel lblMedidaAlpha = new JLabel("mA/\u00BAC");
 		lblMedidaAlpha.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaAlpha.setBounds(214, 146, 46, 14);
+		lblMedidaAlpha.setBounds(214, 185, 46, 14);
 		panelCorreccion.add(lblMedidaAlpha);
 
 		JLabel lblMedidaBetta = new JLabel("mV/\u00BAC");
 		lblMedidaBetta.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaBetta.setBounds(214, 171, 46, 14);
+		lblMedidaBetta.setBounds(214, 216, 46, 14);
 		panelCorreccion.add(lblMedidaBetta);
 
 		JLabel lblMedidaRs = new JLabel("\u03A9");
 		lblMedidaRs.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaRs.setBounds(214, 196, 46, 14);
+		lblMedidaRs.setBounds(214, 244, 46, 14);
 		panelCorreccion.add(lblMedidaRs);
 
 		JLabel lblMedidaKappa = new JLabel("m\u03A9/\u00BAC");
 		lblMedidaKappa.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaKappa.setBounds(214, 221, 46, 14);
+		lblMedidaKappa.setBounds(214, 272, 46, 14);
 		panelCorreccion.add(lblMedidaKappa);
+		//COMBOBOX DE LA TEMPERATURA
+		choiceTemp.setBounds(347, 185, 109, 20);
+		panelCorreccion.add(choiceTemp);
+		//COMBOBOX DE LA IRRADIENCIA
+		
+		choiceIrra.setBounds(347, 241, 109, 20);
+		panelCorreccion.add(choiceIrra);
 		//-----BOTON CORREGIR
 		JButton btnCorregir_1 = new JButton("Corregir");
 		btnCorregir_1.addActionListener(new ActionListener() {
@@ -456,6 +470,7 @@ public class IntfzModuloElegido {
 				try {
 
 					if(choiceMetodo.getSelectedItem().equals("IEC60891 método 1")) {
+
 						//obtenemos la priemra curva
 						Iterator <CurvaOriginal> it = listaDeCurvasACorregir.iterator();
 						CurvaOriginal is = it.next();
@@ -466,9 +481,9 @@ public class IntfzModuloElegido {
 										Double.parseDouble(txtfRs.getText()),
 										Double.parseDouble(txtfKappa.getText()), 
 										is.getIsc(),
-										Double.parseDouble(txtfIrr1.getText()),
+										Double.parseDouble(choiceIrra.getSelectedItem()),
 										Double.parseDouble(txtfIrr2.getText()),
-										Double.parseDouble(txtfT1.getText()),
+										Double.parseDouble(choiceTemp.getSelectedItem()),
 										Double.parseDouble(txtfT2.getText()),
 										is);	
 						
@@ -483,7 +498,7 @@ public class IntfzModuloElegido {
 
 			}
 		});
-		btnCorregir_1.setBounds(510, 168, 89, 42);
+		btnCorregir_1.setBounds(510, 216, 89, 42);
 		panelCorreccion.add(btnCorregir_1);
 		//------BOTON ATRAS
 		JButton btnAtras_correccion = new JButton("Atr\u00E1s");
@@ -497,72 +512,62 @@ public class IntfzModuloElegido {
 				panelCurva.setVisible(true);
 			}
 		});
-		btnAtras_correccion.setBounds(10, 300, 89, 23);
+		btnAtras_correccion.setBounds(10, 618, 89, 23);
 		panelCorreccion.add(btnAtras_correccion);
 		
 		JLabel lblT1 = new JLabel("tempOriginal");
 		lblT1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblT1.setBounds(270, 146, 67, 14);
+		lblT1.setBounds(270, 185, 67, 14);
 		panelCorreccion.add(lblT1);
 		
 		JLabel lblT2 = new JLabel("tempNuevo");
 		lblT2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblT2.setBounds(270, 171, 67, 14);
+		lblT2.setBounds(270, 216, 67, 14);
 		panelCorreccion.add(lblT2);
 		
 		JLabel lblIrr1 = new JLabel("IrraOriginal");
 		lblIrr1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIrr1.setBounds(270, 196, 67, 14);
+		lblIrr1.setBounds(270, 244, 67, 14);
 		panelCorreccion.add(lblIrr1);
 								
 		JLabel lblIrr2 = new JLabel("IrraNueva");
 		lblIrr2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIrr2.setBounds(270, 221, 67, 14);
+		lblIrr2.setBounds(270, 272, 67, 14);
 		panelCorreccion.add(lblIrr2);
-								
-		txtfT1 = new JTextField();
-		txtfT1.setText("0.0");
-		txtfT1.setColumns(10);
-		txtfT1.setBounds(347, 143, 109, 20);
-		panelCorreccion.add(txtfT1);
 								
 		txtfT2 = new JTextField();
 		txtfT2.setText("0.0");
 		txtfT2.setColumns(10);
-		txtfT2.setBounds(347, 168, 109, 20);
+		txtfT2.setBounds(347, 213, 109, 20);
 		panelCorreccion.add(txtfT2);
-								
-		txtfIrr1 = new JTextField();
-		txtfIrr1.setText("0.0");
-		txtfIrr1.setColumns(10);
-		txtfIrr1.setBounds(347, 193, 109, 20);
-		panelCorreccion.add(txtfIrr1);
 								
 		txtfIrr2 = new JTextField();
 		txtfIrr2.setText("0.0");
 		txtfIrr2.setColumns(10);
-		txtfIrr2.setBounds(347, 218, 109, 20);
+		txtfIrr2.setBounds(347, 269, 109, 20);
 		panelCorreccion.add(txtfIrr2);
 								
 		JLabel lblMedidaT1 = new JLabel("\u00BAC");
 		lblMedidaT1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaT1.setBounds(457, 146, 46, 14);
+		lblMedidaT1.setBounds(457, 185, 46, 14);
 		panelCorreccion.add(lblMedidaT1);
 								
 		JLabel lblMedidaT2 = new JLabel("\u00BAC");
 		lblMedidaT2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaT2.setBounds(457, 171, 46, 14);
+		lblMedidaT2.setBounds(457, 216, 46, 14);
 		panelCorreccion.add(lblMedidaT2);
 								
 		JLabel lblMedidaIrr1 = new JLabel("W/m^2");
 		lblMedidaIrr1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaIrr1.setBounds(457, 196, 46, 14);
+		lblMedidaIrr1.setBounds(457, 244, 46, 14);
 		panelCorreccion.add(lblMedidaIrr1);
 								
 		JLabel lblMedidaIrr2 = new JLabel("W/m^2");
 		lblMedidaIrr2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMedidaIrr2.setBounds(457, 221, 46, 14);
+		lblMedidaIrr2.setBounds(457, 272, 46, 14);
 		panelCorreccion.add(lblMedidaIrr2);
+		
+		
 		
 		
 //---------PANEL GRAFICO
