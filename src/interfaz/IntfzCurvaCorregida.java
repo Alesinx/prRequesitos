@@ -17,6 +17,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import principal.CurvaCorregida;
+import principal.ImportarModulo;
 import principal.parIV;
 
 import javax.swing.JLabel;
@@ -93,9 +94,9 @@ public class IntfzCurvaCorregida extends JFrame {
 			//parte de la tabla
 			double pot = pt.getKey()*pt.getValue();	//potencia
 			data[i][0] = i+1;
-			data[i][1] = Math.floor(pt.getKey() * 100000) / 100000;
-			data[i][2] = Math.floor(pt.getValue() * 100000) / 100000;
-			data[i][3] = pot;
+			data[i][1] = ImportarModulo.transform(pt.getKey()) ;
+			data[i][2] = ImportarModulo.transform(pt.getValue()) ;
+			data[i][3] = ImportarModulo.transform(pot);
 			
 			i++;
 			

@@ -237,9 +237,9 @@ public class IntfzModuloElegido {
 					//parte de la tabla
 					double pot = pt.getKey()*pt.getValue();	//potencia
 					temp.addRow(new Object[]{i+1,
-											Math.floor(pt.getKey() * 100000) / 100000
-											,Math.floor(pt.getValue() * 100000) / 100000
-											,pot});
+											ImportarModulo.transform(pt.getKey())
+											,ImportarModulo.transform( pt.getValue() )
+											,ImportarModulo.transform(pot)});
 					
 					i++;
 					

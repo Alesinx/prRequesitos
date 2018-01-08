@@ -112,7 +112,7 @@ public class ImportarModulo {
 		return mod;
 	}
 
-	private static double transform(double d){
+	public static double transform(double d){
 
 		NumberFormat nf = NumberFormat.getInstance(Locale.US);
 		nf.setMaximumFractionDigits(3);
