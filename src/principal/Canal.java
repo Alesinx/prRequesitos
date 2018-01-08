@@ -13,7 +13,9 @@ public class Canal {
 	private String nombre; // Nombre de la medida
 	private String medida; // Magnitud de la medida
 
-	private CurvaOriginal curva; // Curva a la que pertenece el canal
+	private String fechaHoraCurva;
+	private String moduleName;
+	private String campanyaName;
 
 	//-------Constructor
 
@@ -27,7 +29,10 @@ public class Canal {
 		id = i;
 		nombre = name;
 		medida = med;
-		curva=c;
+
+		this.campanyaName=c.getCampName();
+		this.moduleName = c.getModName();
+		this.fechaHoraCurva=c.getFechaHora();
 
 		BDConnection miBD = new BDConnection();
 		miBD.Insert("INSERT INTO Canal VALUES("+i+","+vi+","+vm+","+vf+",'"+name+"','"+med+"','"+c.getFechaHora()+"','"+c.getCampName()+"','"+c.getModName()+"');");
@@ -45,12 +50,13 @@ public class Canal {
 		this.nombre = aux[4].toString();
 		this.medida = aux[5].toString();
 
-		this.curva=null;
+		this.fechaHoraCurva = fechaHora;
+		this.campanyaName = camp;
+		this.moduleName = mod;
 	}
 
 
 	//------Getters
-
 
 
 	public double getValorMedio() {
@@ -73,28 +79,33 @@ public class Canal {
 		return medida;
 	}
 
-	public CurvaOriginal getCurvaOriginal(){
-		return curva;
+	public String getCampanya(){
+		return campanyaName;
 	}
+
+	public String getModulo(){
+		return moduleName;
+	}
+
 
 	//-------Setters
 
 	public void setValorMedio(double valorMedio) throws ClassNotFoundException {
 		this.valorMedio = valorMedio;
 		BDConnection miBD = new BDConnection();
-		miBD.Update("UPDATE CANAL SET valorMedio = "+valorMedio+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
+		miBD.Update("UPDATE CANAL SET valorMedio = "+valorMedio+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+fechaHoraCurva+"';");
 	}
 
 	public void setValorInicial(double valorInicial) throws ClassNotFoundException {
 		this.valorInicial = valorInicial;
 		BDConnection miBD = new BDConnection();
-		miBD.Update("UPDATE CANAL SET valorInicial = "+valorInicial+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
+		miBD.Update("UPDATE CANAL SET valorInicial = "+valorInicial+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+fechaHoraCurva+"';");
 	}
 
 	public void setValorFinal(double valorFinal) throws ClassNotFoundException {
 		this.valorFinal = valorFinal;
 		BDConnection miBD = new BDConnection();
-		miBD.Update("UPDATE CANAL SET valorFinal = "+valorFinal+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
+		miBD.Update("UPDATE CANAL SET valorFinal = "+valorFinal+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+fechaHoraCurva+"';");
 	}
 
 	public void setId(int i) throws ClassNotFoundException {
@@ -103,19 +114,19 @@ public class Canal {
 		}
 		this.id = i;
 		BDConnection miBD = new BDConnection();
-		miBD.Update("UPDATE CANAL SET idCanal = "+i+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
+		miBD.Update("UPDATE CANAL SET idCanal = "+i+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+fechaHoraCurva+"';");
 	}
 
 	public void setNombre(String nombre) throws ClassNotFoundException {
 		this.nombre = nombre;
 		BDConnection miBD = new BDConnection();
-		miBD.Update("UPDATE CANAL SET nombreMedida = "+nombre+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
+		miBD.Update("UPDATE CANAL SET nombreMedida = "+nombre+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+fechaHoraCurva+"';");
 	}
 
 	public void setMedida(String medida) throws ClassNotFoundException {
 		this.medida = medida;
 		BDConnection miBD = new BDConnection();
-		miBD.Update("UPDATE CANAL SET magnitudMedida = "+medida+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+curva.getFechaHora()+"';");
+		miBD.Update("UPDATE CANAL SET magnitudMedida = "+medida+" WHERE curvaOriginal_fechaHoraCurva LIKE '"+fechaHoraCurva+"';");
 	}
 
 
@@ -123,7 +134,9 @@ public class Canal {
 
 	public void Borrar() throws ClassNotFoundException{
 		BDConnection miBD = new BDConnection();
-		miBD.Delete("DELETE FROM Canal WHERE idCanal = "+this.id+" AND curvaOriginal_fechaHoraCurva LIKE '"+this.curva.getFechaHora()+"';");
+		System.out.println("ID: "+this.id);
+		System.out.println("FechaHora: "+fechaHoraCurva);
+		miBD.Delete("DELETE FROM Canal WHERE idCanal = "+this.id+" AND curvaOriginal_fechaHoraCurva LIKE '"+this.fechaHoraCurva+"';");
 
 		this.id = -1;
 		this.valorInicial = -1;
@@ -131,8 +144,10 @@ public class Canal {
 		this.valorFinal = -1;
 		this.nombre = "";
 		this.medida = "";
+		this.campanyaName="";
+		this.moduleName="";
+		this.fechaHoraCurva="";
 
-		this.curva=null;
 	}
 
 }

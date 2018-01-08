@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 import interfaz.BDConnection;
 
-public class CurvaCorregida implements curva {
+public class CurvaCorregida {
 
 	private CurvaOriginal origen; // Almaceno a que curva esta asociada esta curva corregida
 

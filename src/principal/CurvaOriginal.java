@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 import interfaz.BDConnection;
 
-public class CurvaOriginal implements curva {
+public class CurvaOriginal {
 
 	private int idCurva;
 
@@ -69,12 +69,6 @@ public class CurvaOriginal implements curva {
 		sVo.close();
 
 	}
-
-	// En el query SELECT para sacar los canales referentes a esta curva original, me traigo los 3 valores,
-	// el nombre de la medida y la magnitud, where (y le paso fechahoracurva, el nombre de la campanya y el
-	// del modulo) nombreMedida like Velocidad Viento (por ejemplo) y los demas
-
-
 
 
 	public CurvaOriginal(String fechaCurva,String mod) throws ClassNotFoundException {
@@ -239,16 +233,6 @@ public class CurvaOriginal implements curva {
 	}
 
 
-	// Este metodo esta desfasado
-	public void mostrarDatos(){
-		int i = 0;
-		for (parIV p : pts){
-			System.out.println("PARIV" + i + "[Intensidad = " + p.getIntensidad() + "] ; [Voltaje = " + p.getVoltaje() + "]");
-			i++;
-		}
-	}
-
-
 	public int getIdCurva() {
 		return idCurva;
 	}
@@ -264,6 +248,33 @@ public class CurvaOriginal implements curva {
 		return fechaHora;
 	}
 
+	public Canal getVelViento() {
+		return velViento;
+	}
+
+	public Canal getDirViento() {
+		return dirViento;
+	}
+
+	public Canal getHumedad() {
+		return humedad;
+	}
+
+	public Canal getTemperatura() {
+		return temperatura;
+	}
+
+	public Canal getIrradiancia() {
+		return irradiancia;
+	}
+
+	public Canal getRtd() {
+		return rtd;
+	}
+
+	public Canal getCelula() {
+		return celula;
+	}
 
 	public void setCanal(Canal cVelocidadViento, Canal cDireccionViento, Canal cHumedad, Canal cTemperatura,
 			Canal cIrradiancia, Canal cRTD, Canal cCelula) {
@@ -278,6 +289,16 @@ public class CurvaOriginal implements curva {
 	}
 
 	public void Borrar() throws ClassNotFoundException{
+
+		// Borra los canales de la BD
+		this.velViento.Borrar();
+		this.dirViento.Borrar();
+		this.humedad.Borrar();
+		this.irradiancia.Borrar();
+		this.celula.Borrar();
+		this.rtd.Borrar();
+		this.temperatura.Borrar();
+
 		BDConnection miBD = new BDConnection();
 		miBD.Delete("DELETE FROM curvaOriginal WHERE fechaHoraCurva = '"+this.fechaHora+"' AND campanya_nombreModulo = '"+this.modName+"';");
 		this.Isc = -1;
@@ -290,14 +311,7 @@ public class CurvaOriginal implements curva {
 		this.modName = null;
 		this.campName = null;
 
-		// Borra los canales de la BD
-		this.velViento.Borrar();
-		this.dirViento.Borrar();
-		this.humedad.Borrar();
-		this.irradiancia.Borrar();
-		this.celula.Borrar();
-		this.rtd.Borrar();
-		this.temperatura.Borrar();
+
 	}
 
 
